@@ -18,6 +18,7 @@ class User < ApplicationRecord
   #    source: 'follower'
   has_many :requests
   has_many :reports
+  has_many :events
   
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email

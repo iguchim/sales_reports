@@ -1,5 +1,4 @@
 class RequestsController < ApplicationController
-
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :index]
   before_action :set_request, only: [:edit, :update]
 
@@ -32,7 +31,7 @@ class RequestsController < ApplicationController
     else
       @requests = search_results(@search_params)
     end
-#binding.pry
+
   end
 
   def show

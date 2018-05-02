@@ -8,4 +8,8 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
+
+  def is_member(user_id)
+  	!(ReferenceUser.find_by(refer_id: current_user.id, referred_id: user_id).nil?)
+  end
 end
