@@ -19,6 +19,7 @@ gem 'coffee-rails', '4.2.2'
 gem 'jquery-rails', '4.3.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.7.0'
+gem 'mysql2'
 #gem 'jquery-ui-rails'
 
 gem 'cocoon'
@@ -29,9 +30,11 @@ gem 'cocoon'
 #gem 'bootstrap-daterangepicker-rails'
 gem 'simple_form'
 
+gem 'prawn'
+gem 'prawn-table'
+
 group :development, :test do
   #gem 'sqlite3', '1.3.13'
-  gem 'mysql2'
   #gem 'byebug',  '9.0.6', platform: :mri
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -54,8 +57,7 @@ end
 
 group :production do
   #gem 'pg', '0.18.4'
-  gem 'mysql2'
 end
 
 # Windows環境ではtzinfo-dataというgemを含める必要があります
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+#gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
