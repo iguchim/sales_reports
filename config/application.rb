@@ -15,5 +15,7 @@ module SampleApp
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Tokyo'
+    config.assets.paths << "#{Rails}/public/assets/bootstrap"
+    config.action_controller.relative_url_root = '/sales_reports' 
   end
 end
