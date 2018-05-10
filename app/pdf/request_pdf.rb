@@ -1,6 +1,7 @@
 class ReportPdf < prawn::Documet
 
-def initialize()
+  def initialize()
 
-  super()
+    super()
+  end
 end
