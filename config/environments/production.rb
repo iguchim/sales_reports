@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # added 2018 May 10
+  config.action_controller.relative_url_root = '/sales_reports'
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
