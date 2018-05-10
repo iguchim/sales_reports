@@ -1,4 +1,4 @@
-class ReportPdf < prawn::Document
+class ReportPdf < Prawn::Document
 
   def initialize()
 
