@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   get '/req_state', to: 'requests#state'
   get '/rep_state', to: 'reports#state'
+
+  get 'pdf_format' => 'pdf_formats#show'
+  
   # resources :users do
   #   member do
   #     # /users/:id/ ...

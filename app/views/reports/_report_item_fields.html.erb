@@ -2,19 +2,19 @@
   <td class="col-sm-1">
   <%= f.text_area :place, class: 'form-control' %>
   </td>
-  <td class="col-sm-1">
+  <td class="col-sm-2">
   <%= f.text_area :visit, class: 'form-control' %>
   </td>
   <td class="col-sm-2">
   <%= f.text_area :personnel, class: 'form-control' %>
   </td>
-  <td class="col-sm-2">
+  <td class="col-sm-3">
   <%= f.text_area :information, class: 'form-control' %>
   </td>
   <td class="col-sm-2">
   <%= f.text_area :notes, class: 'form-control' %>
   </td>
-  <td class="col-sm-3">
+  <td class="col-sm-2">
   <% if current_user.admin %>
     <%= f.text_area :comment, class: 'form-control' %>
   <% else %>

@@ -54,12 +54,14 @@
 
 
 <div class="col-sm-12">
-<div class="text-right">
-  <%= link_to_add_association '項目追加', f, :report_items, class: 'btn btn-success',
-  data: {association_insertion_node: '#item-association-insertion-point',
-        assoiation_insertion_method: 'append'}
-  %>
+<% if current_user.id == @report.user_id %>
+  <div class="text-right">
+    <%= link_to_add_association '項目追加', f, :report_items, class: 'btn btn-success',
+    data: {association_insertion_node: '#item-association-insertion-point',
+          assoiation_insertion_method: 'append'}
+    %>
 </div>
+<% end %>
 
 <table class="table table-list">
 <thead>
