@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update, :index]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :index, :show]
   before_action :set_request, only: [:edit, :update]
 
   def index
@@ -107,7 +107,13 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
    if @request.auth_id.nil? 
       @request.auth_id = current_user.id
+      UserMailer.with(user_id: @request.user_id, auth_id: @request.auth_id,
+          url: request_url(@request)).notice_from_auth.deliver_now
+        flash[:success] = "承認メールを送信しました。"
     else
+      UserMailer.with(user_id: @request.user_id, auth_id: @request.auth_id,
+          url: request_url(@request)).decline_from_auth.deliver_now
+        flash[:success] = "承認取消メールを送信しました。"
       @request.auth_id = nil
     end
     @request.save
@@ -120,8 +126,14 @@ class RequestsController < ApplicationController
     if @request.auth_id.nil? && @request.user_id == current_user.id
       if @request.state == "下書"
         @request.state = "申請"
+        UserMailer.with(user_id: @request.user_id,
+          url: request_url(@request)).notice_from_user.deliver_now
+        flash[:success] = "申請メールを送信しました。"
       else
         @request.state = "下書"
+        UserMailer.with(user_id: @request.user_id,
+          url: request_url(@request)).decline_from_user.deliver_now
+        flash[:success] = "取消メールを送信しました。"
       end
       @request.save
     end

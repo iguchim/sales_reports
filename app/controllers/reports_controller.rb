@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :show]
   before_action :set_report, only: [:edit, :update]
 
 
@@ -65,9 +65,16 @@ class ReportsController < ApplicationController
   def auth
     return unless current_user.admin
     @report = Report.find(params[:id])
+    user_id = Request.find(@report.request_id).user_id
    if @report.auth_id.nil? 
       @report.auth_id = current_user.id
+      UserMailer.with(user_id: user_id, auth_id: @report.auth_id,
+          url: request_report_url(@report.request_id, @report)).notice_from_auth.deliver_now
+        flash[:success] = "承認メールを送信しました。"
     else
+      UserMailer.with(user_id: user_id, auth_id: @report.auth_id,
+          url: request_report_url(@report.request_id, @report)).decline_from_auth.deliver_now
+        flash[:success] = "承認取消メールを送信しました。"
       @report.auth_id = nil
     end
     @report.save
@@ -81,8 +88,14 @@ class ReportsController < ApplicationController
     if @report.auth_id.nil? && @report.user_id == current_user.id
       if @report.state == "下書"
         @report.state = "申請"
+        UserMailer.with(user_id: @report.user_id,
+          url: request_report_url(@report.request_id, @report)).notice_from_user.deliver_now
+        flash[:success] = "申請メールを送信しました。"
       else
         @report.state = "下書"
+        UserMailer.with(user_id: @report.user_id,
+          url: request_report_url(@report.request_id, @report)).decline_from_user.deliver_now
+        flash[:success] = "取消メールを送信しました。"
       end
       @report.save
     end

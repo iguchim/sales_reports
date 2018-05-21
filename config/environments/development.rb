@@ -27,12 +27,22 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
-  host = 'railstutorial-yasulab.c9users.io'
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :test
+  # host = 'railstutorial-yasulab.c9users.io'
+  config.action_mailer.default_url_options = { host: '127.0.0.1' }
 
-  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { 
+    address: '140.227.20.60', 
+    port: 587, 
+    domain: '140.227.20.60', 
+    user_name: 'iguchi@suwako-resort.co.jp', 
+    password: '4ciq+uEW',
+    authentication: 'plain', 
+    enable_starttls_auto: false
+  }
+
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
