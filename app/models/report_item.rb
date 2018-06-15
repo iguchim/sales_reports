@@ -4,7 +4,8 @@ class ReportItem < ApplicationRecord
   validates :report_id,  presence: true
   validates :place,  presence: true
   validates :visit,  presence: true
-  validates :report,  presence: true
+  validates :personnel,  presence: true
+  validates :information,  presence: true
 
   def self.search(item)
     if !item.blank?

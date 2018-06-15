@@ -49,6 +49,9 @@ class RequestsController < ApplicationController
   def new
     # @request = Request.new
     @request = Form::Request.new
+    if params[:order_id]
+      @request.order_id = params[:order_id]
+    end
     #@request.request_items.build
   end
 
@@ -57,13 +60,13 @@ class RequestsController < ApplicationController
     @request = Form::Request.new(request_params)
     @request.user_id = current_user.id
     @request.state = "下書"
-  
+ 
     if @request.save
       flash[:success] = "出張申請を登録しました。"
       #redirect_to :back  <--- not working
       redirect_to requests_url
     else
-      flash[:danger] = "出張申請を登録出来ませんでした。"
+      #flash[:danger] = "出張申請を登録出来ませんでした。"
       render :new
     end
 
@@ -75,9 +78,10 @@ class RequestsController < ApplicationController
       #redirect_to requests_path
       redirect_to request_path(@request)
     else
-      flash[:danger] = "出張申請を更新出来ませんでした。"
+      #flash[:danger] = "出張申請を更新出来ませんでした。"
       render :edit
     end
+#inding.pry
   end
 
   def edit

@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   def notice_from_user
 
     @user = User.find(params[:user_id])
-    auth_mail = User.find_by(name: '佐々木').email
+    auth_mail = User.find_by(admin: true).email
     @url = params[:url]
     mail(to: auth_mail, subject:'承認要求です。')
     
@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
   def decline_from_user
 
     @user = User.find(params[:user_id])
-    auth_mail = User.find_by(name: '佐々木').email
+    auth_mail = User.find_by(admin: true).email
     @url = params[:url]
     mail(to: auth_mail, subject:'承認要求の取消です。')
     
@@ -39,12 +39,18 @@ class UserMailer < ApplicationMailer
     
   end
 
+  def order_from_auth
+    @auth = User.find(params[:auth_id])
+    user_mail = User.find(params[:user_id]).email
+    @url = params[:url]
+    mail(to: user_mail, subject: '出張指示です。')
+  end
 
-
-
-
-
-
+  def order_delete
+    @auth = User.find(params[:auth_id])
+    user_mail = User.find(params[:user_id]).email
+    mail(to: user_mail, subject: '出張指示が取消されました。')
+  end
 
   #-------------------------------------------------------
   def account_activation(user)

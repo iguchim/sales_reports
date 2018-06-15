@@ -26,7 +26,7 @@
     <% if @report.auth_id.nil? %>
       <p class="col-sm-4">承認：---</p>
     <% else %>
-      <p class="col-sm-4">承認：<%= auth_name(@report.auth_id) %></p>
+      <p class="col-sm-4">承認：<%= user_name(@report.auth_id) %></p>
     <% end %>
   </div>
 

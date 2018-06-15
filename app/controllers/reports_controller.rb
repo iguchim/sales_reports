@@ -37,7 +37,7 @@ class ReportsController < ApplicationController
       #redirect_to requests_path
       redirect_to report_path(@report, :request_id => @report.request_id)
     else
-      flash[:danger] = "出張報告を更新出来ませんでした。"
+      #flash[:danger] = "出張報告を更新出来ませんでした。"
       render :edit
     end
   end

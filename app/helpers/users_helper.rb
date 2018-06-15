@@ -6,12 +6,12 @@ module UsersHelper
     # image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
 
-  def auth_name(id)
-    auth = User.find(id)
-    if auth.nil?
+  def user_name(id)
+    user = User.find(id)
+    if user.nil?
       "---"
     else
-      auth.name
+      user.name
     end
   end
 

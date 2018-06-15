@@ -40,7 +40,7 @@
           <% if request.auth_id.nil? %>
             <td>---</td>
           <% else %>
-            <td><%= auth_name(request.auth_id) %></td>
+            <td><%= user_name(request.auth_id) %></td>
           <% end %>
           <% if request.state.nil? %>
             <td>---</td>
@@ -60,5 +60,6 @@
   </table>
   <%= link_to '新規', new_request_path, class: 'btn btn-primary' %>
   <%= link_to 'カレンダー', schedules_path, class: 'btn btn-primary' %>
+  <%= link_to '出張指示', orders_path, class: 'btn btn-primary' %>
 </div>
 

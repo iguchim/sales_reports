@@ -38,6 +38,10 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+
+  def auth_user?
+    logged_in? && current_user.admin
+  end
   
    # 現在のユーザーをログアウトする
   def log_out

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430071001) do
+ActiveRecord::Schema.define(version: 20180523022744) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(version: 20180430071001) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.datetime "start"
+    t.datetime "end"
+    t.string "state"
+    t.string "place"
+    t.string "visit"
+    t.string "personnel"
+    t.text "purpose"
+    t.text "notes"
+    t.bigint "auth_id"
+    t.datetime "order_date"
+    t.index ["auth_id"], name: "index_orders_on_auth_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reference_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -95,7 +111,9 @@ ActiveRecord::Schema.define(version: 20180430071001) do
     t.string "region"
     t.bigint "auth_id"
     t.datetime "req_date"
+    t.bigint "order_id"
     t.index ["auth_id"], name: "index_requests_on_auth_id"
+    t.index ["order_id"], name: "index_requests_on_order_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -123,6 +141,7 @@ ActiveRecord::Schema.define(version: 20180430071001) do
   add_foreign_key "reports", "users"
   add_foreign_key "reports", "users", column: "auth_id"
   add_foreign_key "request_items", "requests"
+  add_foreign_key "requests", "orders"
   add_foreign_key "requests", "users"
   add_foreign_key "requests", "users", column: "auth_id"
 end

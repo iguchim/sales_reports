@@ -18,5 +18,6 @@ module SampleApp
     config.assets.paths << "#{Rails}/public/assets/bootstrap"
     # moved the below to production.rb
     # config.action_controller.relative_url_root = '/sales_reports' 
+    config.i18n.default_locale = :ja
   end
 end

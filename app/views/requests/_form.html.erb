@@ -1,6 +1,21 @@
 <h2>営業出張申請</h2>
 
 <%= form_for(@request, url: path, method: method) do |f| %>
+
+<% if (method == :post || method == :put) && @request.order_id %>
+  <%= f.hidden_field :order_id, :value => @request.order_id %>
+<% end %>
+
+<% if @request.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="container">
 <div class="row">
 
@@ -17,14 +32,14 @@
 
   <div class="form-group">
     <div class="col-sm-12">
-    <label class="text-right col-sm-2 control-label" for="">期間</label>
+      <label class="text-right col-sm-2 control-label" for="">期間</label>
     <div class="col-sm-4">
       <%= f.text_field :start, :value => (f.object.start.strftime('%Y/%m/%d/%H/%M') unless f.object.start.nil?), class: 'date-picker form-control' %>
     </div>
     <label class="col-sm-1 control-label" for="">:</label>
     <div class="col-sm-4">
       <%= f.text_field :end, :value => (f.object.end.strftime('%Y/%m/%d/%H/%M') unless f.object.end.nil?), class: 'date-picker form-control' %>
-    </div>
+      </div>
     </div>
   </div>
 
@@ -39,7 +54,7 @@
       <%= f.text_field :req_date,  :value => (f.object.req_date.strftime('%Y/%m/%d/%H/%M') unless f.object.req_date.nil?), class: 'date-picker form-control' %>
     </div>
     <label class="text-right col-sm-2 col-sm-offset-6 control-label" for="">営業</label>
-    <div class="col-sm-4 aline-cente">
+    <div class="col-sm-4 aline-center">
       <% if method == :put %>
         <%= @request.user.name%><!-- ONLY FOR TIME BEEING!!!! -->
       <% else %>

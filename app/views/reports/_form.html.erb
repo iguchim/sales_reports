@@ -1,6 +1,17 @@
 <h2>営業出張報告</h2>
 
 <%= form_for(@report, url: path, method: method) do |f| %>
+
+<% if @report.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="container">
 <div class="row">
 
@@ -23,7 +34,7 @@
     </div>
     <label class="col-sm-1 control-label" for="">:</label>
     <div class="col-sm-4">
-      <%= f.text_field :end, :value => (f.object.end.strftime('%Y/%m/%d')), class: 'date-picker form-control' %>
+      <%= f.text_field :end, :value => (f.object.end.strftime('%Y/%m/%d') unless f.object.end.nil? ), class: 'date-picker form-control' %>
     </div>
     </div>
   </div>
@@ -36,10 +47,10 @@
     <div class="col-sm-12">
     <label class="text-right col-sm-3 col-sm-offset-5 control-label" for="">申請日</label>
     <div class="col-sm-4">
-      <%= f.text_field :rep_date, :value => (f.object.end.strftime('%Y/%m/%d')),class: 'date-picker form-control' %>
+      <%= f.text_field :rep_date, :value => (f.object.rep_date.strftime('%Y/%m/%d') unless f.object.rep_date.nil? ),class: 'date-picker form-control' %>
     </div>
     <label class="text-right col-sm-2 col-sm-offset-6 control-label" for="">営業</label>
-    <div class="col-sm-4 aline-cente">
+    <div class="col-sm-4 aline-center">
       <% if method == :put %>
         <%= @report.user.name%><!-- ONLY FOR TIME BEEING!!!! -->
       <% else %>

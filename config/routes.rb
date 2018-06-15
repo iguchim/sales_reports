@@ -49,6 +49,10 @@ Rails.application.routes.draw do
     resources :report_items
   end
 
+  resources :orders do
+    resources :requests
+  end
+
   resources :events
 
   get '/schedules', to: 'schedules#index'
