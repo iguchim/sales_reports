@@ -70,7 +70,7 @@
 
 
 <div class="col-sm-12">
-<% if current_user.id == @request.user_id %>
+<% if current_user.id == @request.user_id || method == :post %>
 <div class="text-right">
   <%= link_to_add_association '項目追加', f, :request_items, class: 'btn btn-success',
   data: {association_insertion_node: '#item-association-insertion-point',
