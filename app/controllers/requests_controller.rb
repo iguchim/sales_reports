@@ -64,7 +64,8 @@ class RequestsController < ApplicationController
     if @request.save
       flash[:success] = "出張申請を登録しました。"
       #redirect_to :back  <--- not working
-      redirect_to requests_url
+      #redirect_to requests_url
+      redirect_to request_path(@request)
     else
       #flash[:danger] = "出張申請を登録出来ませんでした。"
       render :new
